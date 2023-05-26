@@ -3,11 +3,9 @@ from datetime import datetime
 import mysql.connector
 import random
 
-# TODO: SQL: password shoulde be root instead
-
 cnx = mysql.connector.connect(host='localhost',
                               user='root',
-                              password='Start123')
+                              password='root')
 cursor = cnx.cursor(dictionary=True)
 experimental = False
 
