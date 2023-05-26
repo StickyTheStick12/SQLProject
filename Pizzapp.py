@@ -5,7 +5,7 @@ import random
 
 cnx = mysql.connector.connect(host='localhost',
                               user='root',
-                              password='root')
+                              password='Start123')
 cursor = cnx.cursor(dictionary=True)
 experimental = False
 
@@ -54,7 +54,7 @@ def Experimental():
                         elseif choice = 2 then # choice 2 lower the prciePerKm by % 
                             update RunnersOrders
                             set Price = Price-Distance*(lowerPrice/100);
-                        else #choice 3 lower the price for the pizza
+                        else # choice 3 lower the price for the pizza
                             update RunnersOrders
                             set Price = Price - 5;
                         end if;
@@ -62,7 +62,7 @@ def Experimental():
 
 
 def Start():
-    # cursor.execute("CREATE DATABASE Pizzapp")
+    #cursor.execute("CREATE DATABASE Pizzapp")
     cursor.execute("USE Pizzapp")
     cursor.execute("drop table RunnersOrders")
 
@@ -197,7 +197,7 @@ def Start():
                             where date(OrderTime) = dat
                             group by hour(OrderTime)
                             order by hour(OrderTime) asc;
-                        else #returns amount of pizzas sold
+                        else # returns amount of pizzas sold
                             select count(CustomerId), PizzaName
                             from (CustomersOrders inner join PizzaNames on CustomersOrders.PizzaId=PizzaNames.PizzaId)
                             group by PizzaNames.PizzaId
@@ -279,7 +279,7 @@ def Start():
                         # We could also optimistically pick a new runner who haven't delivered any order yet by just picking a random int i python
                         # and make it like 20% chance to pick a new runner then we check here whether we have a new runner otherwise continue on.
 
-                        #select a runner who haven't delivered anything yet
+                        # select a runner who haven't delivered anything yet
                         select RunnerId into @pickedRunner from Deliverymen D where D.RunnerId not in (select Ro.RunnerId from RunnersOrders Ro);
 
                         # if we are asked to find a deliver who haven't delivered anything yet and we can't pick the best runner
@@ -287,7 +287,7 @@ def Start():
                             set @run = 1;
                         end if;
 
-                        if numb=1 then #pick the best runner that is available
+                        if numb=1 then # pick the best runner that is available
                             # find the latest delivery for each runner
                             drop table if exists recentPickup;
                             create temporary table recentPickup
@@ -339,7 +339,6 @@ def Start():
                         end if;
 
                         if @pickedRunner is null then
-                            select "Couldn't find a runner this time";
                             leave this_proc;
                         end if;
 
