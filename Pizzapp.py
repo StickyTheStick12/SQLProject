@@ -362,7 +362,7 @@ def main():
         print("hello, what would you like to do?")
         print("1. Customer")
         print("2. Administration")
-        print("3. Experimental")
+        print("3. Turn on price")
         print("4. exit")
         choice = int(input())
 
